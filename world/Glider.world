@@ -11,7 +11,7 @@
         </include>
 
         <!-- A testing model that includes the glider model -->
-        <model name="Glider">
+<!--        <model name="Glider">-->
             <include>
 
                 <uri>model://Glider</uri>
@@ -20,9 +20,7 @@
 
             <!-- Attach the plugin to this model -->
 
-            <plugin name="rodos_plugin" filename="cmake-build-debug/librodos_plugin.so"/>
-
-        </model>
+<!--        </model>-->
 
     </world>
 </sdf>

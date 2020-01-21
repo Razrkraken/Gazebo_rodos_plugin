@@ -36,12 +36,6 @@ namespace gazebo {
     public:
         virtual void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
 
-            // Safety check
-            if (_model->GetJointCount() == 0) {
-                std::cerr << "Invalid joint count, Velodyne plugin not loaded\n";
-                return;
-            }
-
             // Store the model pointer for convenience.
             this->model = _model;
 
@@ -55,10 +49,18 @@ namespace gazebo {
              * */
 
 
-            this->joint1 = _model->GetJoints()[2]; // Joint_Tailplane+Elevator
-            this->joint2 = _model->GetJoints()[3]; // Joint_Fuselage+Rudder
+            this->joint1 = _model->GetJoint(
+                    model->GetName() + "::Joint_Tailplane+Elevator"); // Joint_Tailplane+Elevator
+            this->joint2 = _model->GetJoint(model->GetName() + "::Joint_Fuselage+Rudder"); // Joint_Fuselage+Rudder
+            // Safety check
+            if (this->joint1 == nullptr || this->joint2 == nullptr) {
+                std::cerr << "Invalid joint count, Velodyne plugin not loaded\n"
+                          << model->GetScopedName(true) + "::Joint_Tailplane+Elevator\n";
+                return;
+            }
 
-            //std::cout << joint->GetName() << std::endl;
+            std::cout << joint1->GetScopedName() << std::endl;
+            std::cout << joint2->GetScopedName() << std::endl;
 
 
             // Setup a P-controller, with a gain of 0.1.
@@ -106,13 +108,20 @@ namespace gazebo {
             std::string topicName1 = "~/" + this->model->GetName() + "/elevator_angle";
             std::string topicName2 = "~/" + this->model->GetName() + "/rudder_angle";
 
-            std::cout << topicName1 << " : " << topicName2 << std::endl; // ~/Glider/elevator_angle : ~/Glider/rudder_angle
+//            std::cout << topicName1 << " : " << topicName2 << std::endl; // ~/Glider/elevator_angle : ~/Glider/rudder_angle
 
 // Subscribe to the topic, and register a callback
             this->sub1 = this->node->Subscribe(topicName1,
                                                &RodosPlugin::OnMsgElevator, this);
             this->sub2 = this->node->Subscribe(topicName2,
                                                &RodosPlugin::OnMsgRudder, this);
+
+
+        }
+
+    private:
+        void createTopic(physics::JointPtr joint) {
+            std::string topicName = joint->GetName();
 
 
         }
