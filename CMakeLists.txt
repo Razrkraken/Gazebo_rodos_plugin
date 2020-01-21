@@ -12,7 +12,7 @@ add_library(rodos_plugin SHARED rodos_plugin.cc)
 target_link_libraries(rodos_plugin ${GAZEBO_LIBRARIES})
 
 add_custom_command(TARGET rodos_plugin POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/world/Gleider $ENV{HOME}/.gazebo/models/Gleider)
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/world/Glider $ENV{HOME}/.gazebo/models/Glider)
 
 
 # Build the stand-alone test program

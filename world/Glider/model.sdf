@@ -10,14 +10,14 @@
                 <geometry>
                     <!--box> <size> 1 8 2 </size> </box-->
                     <mesh>
-                        <uri> model://Gleider/meshes/Fuselage.dae</uri>
+                        <uri> model://Glider/meshes/Fuselage.dae</uri>
                     </mesh>
                 </geometry>
             </collision>
             <visual name="Fuselage_visual">
                 <geometry>
                     <mesh>
-                        <uri> model://Gleider/meshes/Fuselage.dae</uri>
+                        <uri> model://Glider/meshes/Fuselage.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -53,14 +53,14 @@
             <collision name="Tailplane_collision">
                 <geometry>
                     <mesh>
-                        <uri> model://Gleider/meshes/Tailplane.dae</uri>
+                        <uri> model://Glider/meshes/Tailplane.dae</uri>
                     </mesh>
                 </geometry>
             </collision>
             <visual name="Tailplane_visual">
                 <geometry>
                     <mesh>
-                        <uri> model://Gleider/meshes/Tailplane.dae</uri>
+                        <uri> model://Glider/meshes/Tailplane.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -82,14 +82,14 @@
             <collision name="Wing_collision">
                 <geometry>
                     <mesh>
-                        <uri> model://Gleider/meshes/Wing.dae</uri>
+                        <uri> model://Glider/meshes/Wing.dae</uri>
                     </mesh>
                 </geometry>
             </collision>
             <visual name="Wing_visual">
                 <geometry>
                     <mesh>
-                        <uri> model://Gleider/meshes/Wing.dae</uri>
+                        <uri> model://Glider/meshes/Wing.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -112,14 +112,14 @@
                 <geometry>
                     <!--box> <size> 1 8 2 </size> </box-->
                     <mesh>
-                        <uri> model://Gleider/meshes/Elevator.dae</uri>
+                        <uri> model://Glider/meshes/Elevator.dae</uri>
                     </mesh>
                 </geometry>
             </collision>
             <visual name="Elevator_visual">
                 <geometry>
                     <mesh>
-                        <uri> model://Gleider/meshes/Elevator.dae</uri>
+                        <uri> model://Glider/meshes/Elevator.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -142,14 +142,14 @@
                 <geometry>
                     <!--box> <size> 1 8 2 </size> </box-->
                     <mesh>
-                        <uri> model://Gleider/meshes/Rudder.dae</uri>
+                        <uri> model://Glider/meshes/Rudder.dae</uri>
                     </mesh>
                 </geometry>
             </collision>
             <visual name="Rudder_visual">
                 <geometry>
                     <mesh>
-                        <uri> model://Gleider/meshes/Rudder.dae</uri>
+                        <uri> model://Glider/meshes/Rudder.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -172,14 +172,14 @@
                 <geometry>
                     <!--box> <size> 1 8 2 </size> </box-->
                     <mesh>
-                        <uri> model://Gleider/meshes/LeftAileron.dae</uri>
+                        <uri> model://Glider/meshes/LeftAileron.dae</uri>
                     </mesh>
                 </geometry>
             </collision>
             <visual name="LeftAileron_visual">
                 <geometry>
                     <mesh>
-                        <uri> model://Gleider/meshes/LeftAileron.dae</uri>
+                        <uri> model://Glider/meshes/LeftAileron.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -202,14 +202,14 @@
                 <geometry>
                     <!--box> <size> 1 8 2 </size> </box-->
                     <mesh>
-                        <uri> model://Gleider/meshes/RightAileron.dae</uri>
+                        <uri> model://Glider/meshes/RightAileron.dae</uri>
                     </mesh>
                 </geometry>
             </collision>
             <visual name="RightAileron_visual">
                 <geometry>
                     <mesh>
-                        <uri> model://Gleider/meshes/RightAileron.dae</uri>
+                        <uri> model://Glider/meshes/RightAileron.dae</uri>
                     </mesh>
                 </geometry>
             </visual>

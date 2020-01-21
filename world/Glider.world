@@ -10,13 +10,12 @@
             <uri>model://ground_plane</uri>
         </include>
 
-        <!-- A testing model that includes the Velodyne sensor model -->
-        <model name="Gleider">
+        <!-- A testing model that includes the glider model -->
+        <model name="Glider">
             <include>
 
-                <uri>model://Gleider</uri>
+                <uri>model://Glider</uri>
 
-                <!--<uri>model://velodyne_hdl32</uri>-->
             </include>
 
             <!-- Attach the plugin to this model -->

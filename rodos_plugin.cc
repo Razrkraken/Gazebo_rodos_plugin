@@ -106,7 +106,7 @@ namespace gazebo {
             std::string topicName1 = "~/" + this->model->GetName() + "/elevator_angle";
             std::string topicName2 = "~/" + this->model->GetName() + "/rudder_angle";
 
-            std::cout << topicName1 << " : " << topicName2 << std::endl; // ~/Gleider/elevator_angle : ~/Gleider/rudder_angle
+            std::cout << topicName1 << " : " << topicName2 << std::endl; // ~/Glider/elevator_angle : ~/Glider/rudder_angle
 
 // Subscribe to the topic, and register a callback
             this->sub1 = this->node->Subscribe(topicName1,
