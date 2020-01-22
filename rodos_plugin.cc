@@ -19,12 +19,20 @@ namespace gazebo {
 /// \param[in] _msg Repurpose a vector3 message. This function will
 /// only use the x component.
     private:
-        void OnMsgElevator(ConstVector3dPtr &_msg) {
-            this->model->GetJointController()->SetVelocityTarget(this->joint1->GetScopedName(), _msg->x());
+        void OnMsgElevator(ConstVector2dPtr &_msg) {
+            this->model->GetJointController()->SetPositionTarget(joints[2]->GetScopedName(), _msg->x());
         }
 
-        void OnMsgRudder(ConstVector3dPtr &_msg) {
-            this->model->GetJointController()->SetVelocityTarget(this->joint2->GetScopedName(), _msg->x());
+        void OnMsgRudder(ConstVector2dPtr  &_msg) {
+            this->model->GetJointController()->SetPositionTarget(joints[3]->GetScopedName(), _msg->x());
+        }
+
+        void OnMsgRightAileron(ConstVector2dPtr &_msg) {
+            this->model->GetJointController()->SetPositionTarget(joints[5]->GetScopedName(), _msg->x());
+        }
+
+        void OnMsgLeftAileron(ConstVector2dPtr &_msg) {
+            this->model->GetJointController()->SetPositionTarget(joints[4]->GetScopedName(), _msg->x());
         }
 
 
@@ -40,88 +48,85 @@ namespace gazebo {
             this->model = _model;
 
             /*
-             * Joint_Fuselage+Tailplane
-             * Joint_Fuselage+Wing
-             * Joint_Tailplane+Elevator
-             * Joint_Fuselage+Rudder
-             * Joint_Wing+LeftAileron
-             * Joint_Wing+RightAileron
+             * [0] Joint_Fuselage+Tailplane (Fixed)
+             * [1] Joint_Fuselage+Wing      (Fixed)
+             * [2] Joint_Tailplane+Elevator (Revolute)
+             * [3] Joint_Fuselage+Rudder    (Revolute)
+             * [4] Joint_Wing+LeftAileron   (Revolute)
+             * [5] Joint_Wing+RightAileron  (Revolute)
              * */
 
+            /***Configuring Joint***/
 
-            this->joint1 = _model->GetJoint(
-                    model->GetName() + "::Joint_Tailplane+Elevator"); // Joint_Tailplane+Elevator
-            this->joint2 = _model->GetJoint(model->GetName() + "::Joint_Fuselage+Rudder"); // Joint_Fuselage+Rudder
-            // Safety check
-            if (this->joint1 == nullptr || this->joint2 == nullptr) {
-                std::cerr << "Invalid joint count, Velodyne plugin not loaded\n"
-                          << model->GetScopedName(true) + "::Joint_Tailplane+Elevator\n";
-                return;
+            //get pointer to Elevator
+            this->pid = common::PID(0.01, 0 , 0);
+
+            this->joints = model->GetJoints();
+
+            for (int j = 0; j < model->GetJointCount(); ++j) {
+                physics::JointPtr joint = joints[j];
+                // Safety check
+                if (joint == nullptr) {
+                    std::cerr << "Invalid joint count, rodos plugin not loaded\n";
+                    return;
+                }
+
+                // Apply the P-controller to the joint
+
+                if (joint->GetType() == 576) {
+                    this->model->GetJointController()->SetPositionPID(
+                            joint->GetScopedName(), pid);
+                    // Set the joint's target initial Position.
+                    this->model->GetJointController()->SetPositionTarget(
+                            joint->GetScopedName(), 0);
+                }
             }
 
-            std::cout << joint1->GetScopedName() << std::endl;
-            std::cout << joint2->GetScopedName() << std::endl;
+            /***Create Subscribers***/
 
-
-            // Setup a P-controller, with a gain of 0.1.
-            this->pid1 = common::PID(0.1, 0, 0);
-            this->pid2 = common::PID(0.1, 0, 0);
-
-
-            // Apply the P-controller to the joint.
-            this->model->GetJointController()->SetPositionPID(
-                    this->joint1->GetScopedName(), this->pid1);
-
-            this->model->GetJointController()->SetPositionPID(
-                    this->joint2->GetScopedName(), this->pid2);
-
-            // Set the joint's target velocity. This target velocity is just
-            // for demonstration purposes.
-            //this->model->GetJointController()->SetVelocityTarget(
-            //    this->joint->GetScopedName(), 10.0);
-
-// Default to zero velocity
-//            double velocity = 0;
-
-// Check that the velocity element exists, then read the value
-//            if (_sdf->HasElement("velocity"))
-//                velocity = _sdf->Get<double>("velocity");
-
-// Set the joint's target velocity. This target velocity is just
-// for demonstration purposes.
-            this->model->GetJointController()->SetPositionTarget(
-                    this->joint1->GetScopedName(), 0.5);
-
-            this->model->GetJointController()->SetPositionTarget(
-                    this->joint2->GetScopedName(), 0.5);
-
-
-// Create the node
+            // Create the node
             this->node = transport::NodePtr(new transport::Node());
+
 #if GAZEBO_MAJOR_VERSION < 8
             this->node->Init(this->model->GetWorld()->GetName());
 #else
             this->node->Init(this->model->GetWorld()->Name());
 #endif
 
-// Create a topic name
-            std::string topicName1 = "~/" + this->model->GetName() + "/elevator_angle";
-            std::string topicName2 = "~/" + this->model->GetName() + "/rudder_angle";
+            // Create a topic name
+            std::string topicName1 = "~/" + this->model->GetName() + "/elevator_soll";
+            std::string topicName2 = "~/" + this->model->GetName() + "/rudder_soll";
+            std::string topicName3 = "~/" + this->model->GetName() + "/leftA_soll";
+            std::string topicName4 = "~/" + this->model->GetName() + "/rightA_soll";
 
-//            std::cout << topicName1 << " : " << topicName2 << std::endl; // ~/Glider/elevator_angle : ~/Glider/rudder_angle
+            std::string pubName1 = "~/" + this->model->GetName() + "/elevator_ist";
+            std::string pubName2 = "~/" + this->model->GetName() + "/rudder_ist";
+            std::string pubName3 = "~/" + this->model->GetName() + "/leftA_ist";
+            std::string pubName4 = "~/" + this->model->GetName() + "/rightA_ist";
 
-// Subscribe to the topic, and register a callback
+            // Subscribe to the topic, and register a callback
             this->sub1 = this->node->Subscribe(topicName1,
                                                &RodosPlugin::OnMsgElevator, this);
+
             this->sub2 = this->node->Subscribe(topicName2,
                                                &RodosPlugin::OnMsgRudder, this);
 
+            this->sub3 = this->node->Subscribe(topicName3,
+                                               &RodosPlugin::OnMsgLeftAileron, this);
 
-        }
+            this->sub4 = this->node->Subscribe(topicName4,
+                                               &RodosPlugin::OnMsgRightAileron, this);
 
-    private:
-        void createTopic(physics::JointPtr joint) {
-            std::string topicName = joint->GetName();
+
+//            this->pub1 = this->node->Advertise<msgs::Vector3d>(pubName1,50,50);
+//            this->pub2 = this->node->Advertise<msgs::Vector3d>(pubName2,50,50);
+//            this->pub3 = this->node->Advertise<msgs::Vector3d>(pubName3,50,50);
+//            this->pub4 = this->node->Advertise<msgs::Vector3d>(pubName4,50,50);
+//
+//            gazebo::msgs::Vector3d msg;
+//
+//            this->pub1->Publish()
+
 
 
         }
@@ -130,16 +135,9 @@ namespace gazebo {
     private:
         physics::ModelPtr model;
 
-/// \brief Pointer to the joint.
-    private:
-        physics::JointPtr joint1;
-        physics::JointPtr joint2;
-
-
 /// \brief A PID controller for the joint.
     private:
-        common::PID pid1;
-        common::PID pid2;
+        common::PID pid;
 
 /// \brief A node used for transport
     private:
@@ -149,6 +147,12 @@ namespace gazebo {
     private:
         transport::SubscriberPtr sub1;
         transport::SubscriberPtr sub2;
+        transport::SubscriberPtr sub3;
+        transport::SubscriberPtr sub4;
+
+
+    private:
+        physics::Joint_V joints;
 
     };
 
