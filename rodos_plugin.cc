@@ -8,7 +8,7 @@
 
 
 namespace gazebo {
-/// \brief A plugin to control a Velodyne sensor.
+/// \brief A plugin to control joint of Glider.
     class RodosPlugin : public ModelPlugin {
         /// \brief Constructor
     public:
@@ -16,26 +16,38 @@ namespace gazebo {
 
 
 /// \brief Handle incoming message
-/// \param[in] _msg Repurpose a vector3 message. This function will
+/// \param[in] _msg Repurpose a vector2 message. This function will
 /// only use the x component.
     private:
         void OnMsgElevator(ConstVector2dPtr &_msg) {
             this->model->GetJointController()->SetPositionTarget(joints[2]->GetScopedName(), _msg->x());
         }
-
-        void OnMsgRudder(ConstVector2dPtr  &_msg) {
-            this->model->GetJointController()->SetPositionTarget(joints[3]->GetScopedName(), _msg->x());
+        /*void OnMsgRudder(ConstVector2dPtr &_msg) {
+            double s =
+                    (_msg->x() > joints[3]->GetUpperLimit(0)) ? joints[3]->GetUpperLimit(0) : (_msg->x() <
+                                                                                       joints[3]->GetLowerLimit(0))
+                                                                                      ? joints[3]->GetLowerLimit(0)
+                                                                                      : _msg->x();
+            this->model->GetJointController()->SetPositionTarget(joints[3]->GetScopedName(), s);
         }
 
         void OnMsgRightAileron(ConstVector2dPtr &_msg) {
-            this->model->GetJointController()->SetPositionTarget(joints[5]->GetScopedName(), _msg->x());
+            double s =
+                    (_msg->x() > joints[5]->GetUpperLimit(0)) ? joints[5]->GetUpperLimit(0) : (_msg->x() <
+                                                                                       joints[5]->GetLowerLimit(0))
+                                                                                      ? joints[5]->GetLowerLimit(0)
+                                                                                      : _msg->x();
+            this->model->GetJointController()->SetPositionTarget(joints[5]->GetScopedName(), s);
         }
 
         void OnMsgLeftAileron(ConstVector2dPtr &_msg) {
-            this->model->GetJointController()->SetPositionTarget(joints[4]->GetScopedName(), _msg->x());
-        }
-
-
+            double s =
+                    (_msg->x() > joints[4]->GetUpperLimit(0) ? joints[4]->GetUpperLimit(0) : (_msg->x() <
+                                                                                       joints[4]->GetLowerLimit(0))
+                                                                                      ? joints[4]->GetLowerLimit(0)
+                                                                                      : _msg->x();
+            this->model->GetJointController()->SetPositionTarget(joints[4]->GetScopedName(), s);
+        }*/
         /// \brief The load function is called by Gazebo when the plugin is
         /// inserted into simulation
         /// \param[in] _model A pointer to the model that this plugin is
@@ -59,10 +71,11 @@ namespace gazebo {
             /***Configuring Joint***/
 
             //get pointer to Elevator
-            this->pid = common::PID(0.01, 0 , 0);
+            this->pid = common::PID(0.01, 0, 0);
 
             this->joints = model->GetJoints();
 
+            /**Set PID Values**/
             for (int j = 0; j < model->GetJointCount(); ++j) {
                 physics::JointPtr joint = joints[j];
                 // Safety check
@@ -70,9 +83,7 @@ namespace gazebo {
                     std::cerr << "Invalid joint count, rodos plugin not loaded\n";
                     return;
                 }
-
                 // Apply the P-controller to the joint
-
                 if (joint->GetType() == 576) {
                     this->model->GetJointController()->SetPositionPID(
                             joint->GetScopedName(), pid);
@@ -83,7 +94,6 @@ namespace gazebo {
             }
 
             /***Create Subscribers***/
-
             // Create the node
             this->node = transport::NodePtr(new transport::Node());
 
@@ -92,7 +102,6 @@ namespace gazebo {
 #else
             this->node->Init(this->model->GetWorld()->Name());
 #endif
-
             // Create a topic name
             std::string topicName1 = "~/" + this->model->GetName() + "/elevator_soll";
             std::string topicName2 = "~/" + this->model->GetName() + "/rudder_soll";
@@ -108,15 +117,6 @@ namespace gazebo {
             this->sub1 = this->node->Subscribe(topicName1,
                                                &RodosPlugin::OnMsgElevator, this);
 
-            this->sub2 = this->node->Subscribe(topicName2,
-                                               &RodosPlugin::OnMsgRudder, this);
-
-            this->sub3 = this->node->Subscribe(topicName3,
-                                               &RodosPlugin::OnMsgLeftAileron, this);
-
-            this->sub4 = this->node->Subscribe(topicName4,
-                                               &RodosPlugin::OnMsgRightAileron, this);
-
 
 //            this->pub1 = this->node->Advertise<msgs::Vector3d>(pubName1,50,50);
 //            this->pub2 = this->node->Advertise<msgs::Vector3d>(pubName2,50,50);
@@ -126,9 +126,6 @@ namespace gazebo {
 //            gazebo::msgs::Vector3d msg;
 //
 //            this->pub1->Publish()
-
-
-
         }
 
 /// \brief Pointer to the model.
@@ -146,14 +143,8 @@ namespace gazebo {
 /// \brief A subscriber to a named topic.
     private:
         transport::SubscriberPtr sub1;
-        transport::SubscriberPtr sub2;
-        transport::SubscriberPtr sub3;
-        transport::SubscriberPtr sub4;
-
-
     private:
         physics::Joint_V joints;
-
     };
 
 // Tell Gazebo about this plugin, so that Gazebo can call Load on this plugin.

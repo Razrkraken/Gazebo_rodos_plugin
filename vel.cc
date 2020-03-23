@@ -1,6 +1,16 @@
+//
+// Created by alejandro on 28.01.20.
+//
+
+#ifndef RODOS_PLUGIN_VEL_H
+#define RODOS_PLUGIN_VEL_H
+
+#endif //RODOS_PLUGIN_VEL_H
+
 #include <gazebo/gazebo_config.h>
 #include <gazebo/transport/transport.hh>
 #include <gazebo/msgs/msgs.hh>
+//#include "rodos.h"
 
 // Gazebo's API has changed between major releases. These changes are
 // accounted for with #if..#endif blocks in this file.
@@ -11,6 +21,7 @@
 #include <gazebo/gazebo_client.hh>
 
 #endif
+
 
 /////////////////////////////////////////////////
 int main(int _argc, char **_argv) {
@@ -27,7 +38,7 @@ int main(int _argc, char **_argv) {
 
     // Publish to the rodos topic
     gazebo::transport::PublisherPtr pub =
-            node->Advertise<gazebo::msgs::Vector2dPtr>("~/Schleicher_ASK_21/elevator_soll");
+            node->Advertise<gazebo::msgs::Vector2d>("~/Schleicher_ASK_21/elevator_soll");
 
 
     // Wait for a subscriber to connect to this publisher
@@ -62,3 +73,6 @@ int main(int _argc, char **_argv) {
 
 
 }
+
+
+
