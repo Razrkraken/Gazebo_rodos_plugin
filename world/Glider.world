@@ -11,16 +11,16 @@
         </include>
 
         <!-- A testing model that includes the glider model -->
-<!--        <model name="Glider">-->
-            <include>
+        <!--        <model name="Glider">-->
+        <include>
 
-                <uri>model://Glider</uri>
+            <uri>model://Glider</uri>
 
-            </include>
+        </include>
 
-            <!-- Attach the plugin to this model -->
+        <!-- Attach the plugin to this model -->
 
-<!--        </model>-->
+        <!--        </model>-->
 
     </world>
 </sdf>
