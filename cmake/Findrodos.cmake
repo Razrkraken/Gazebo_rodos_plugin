@@ -1,11 +1,11 @@
 # Look for the header file.
-set(RODOS_ROOT /home/alejandro/GAZEBO_SIMS/rodos_plugin/RODOS/rodos)  #TODO: Relative path
+set(RODOS_ROOT /home/alejandro/gazebo_ws/rodos_plugin/rodos)  #TODO: Relative path
 #
 set(RODOS_INCLUDE_DIR ${RODOS_ROOT}/api ${RODOS_ROOT}/src/independent ${RODOS_ROOT}/src/independent/gateway
-        ${RODOS_ROOT}/src/bare-metal-generic ${RODOS_ROOT}/src/bare-metal/linux_x86 ${RODOS_ROOT}/../support_libs)
+        ${RODOS_ROOT}/src/bare-metal-generic ${RODOS_ROOT}/src/bare-metal/linux_x86 ${RODOS_ROOT}/support/support_libs)
 #
 ## Look for the library.
-find_library(RODOS_LIBRARY NAMES librodos.a PATHS ${RODOS_ROOT}/build-linux/)
+find_library(RODOS_LIBRARY NAMES librodos.a PATHS ${RODOS_ROOT}/linux-build/)
 include(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(Rodos DEFAULT_MSG RODOS_LIBRARY RODOS_INCLUDE_DIR)
 

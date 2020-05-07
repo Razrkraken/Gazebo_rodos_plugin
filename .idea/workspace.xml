@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="rodos_plugin" targetName="rodos_plugin" />
+      <config projectName="rodos_plugin" targetName="vel" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="30ee7124-23dc-49f7-bded-7242ecda4575" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gazebo.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rodos" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RODOS/rodos" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/Findrodos.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/Findrodos.cmake" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1bXdqmzz7ZBZ7NL1qOGnsr1BmKt" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gazebo.sh" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunManager" selected="Shell Script.run_sim">
+    <configuration name="Gazebo" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="rodos_plugin" TARGET_NAME="rodos_plugin" CONFIG_NAME="Debug" RUN_PATH="$PROJECT_DIR$/cmake-build-debug/librodos_plugin.so">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="vel" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="rodos_plugin" TARGET_NAME="vel" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="rodos_plugin" RUN_TARGET_NAME="vel">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="run_sim" type="ShConfigurationType">
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/gazebo.sh" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.Gazebo" />
+      <item itemvalue="CMake Application.vel" />
+      <item itemvalue="Shell Script.run_sim" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="30ee7124-23dc-49f7-bded-7242ecda4575" name="Default Changelist" comment="" />
+      <created>1588782565909</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1588782565909</updated>
+      <workItem from="1588782570262" duration="5429000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="659" y="264" key="#Gazebo" timestamp="1588783911019">
+      <screen x="65" y="24" width="1855" height="1056" />
+    </state>
+    <state x="659" y="264" key="#Gazebo/1920.603.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1588783911019" />
+    <state x="640" y="208" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588784284933">
+      <screen x="65" y="24" width="1855" height="1056" />
+    </state>
+    <state x="640" y="208" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.603.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1588784284933" />
+    <state x="855" y="245" width="874" height="582" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1588784181102">
+      <screen x="65" y="24" width="1855" height="1056" />
+    </state>
+    <state x="855" y="245" width="874" height="582" key="#com.intellij.ide.macro.MacrosDialog/1920.603.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1588784181102" />
+    <state x="935" y="381" key="#com.intellij.tools.ToolEditorDialog" timestamp="1588784233849">
+      <screen x="65" y="24" width="1855" height="1056" />
+    </state>
+    <state x="935" y="381" key="#com.intellij.tools.ToolEditorDialog/1920.603.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1588784233849" />
+    <state x="658" y="250" width="666" height="575" key="#rodos_plugin" timestamp="1588782789471">
+      <screen x="65" y="24" width="1855" height="1056" />
+    </state>
+    <state x="658" y="250" width="666" height="575" key="#rodos_plugin/1920.603.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1588782789471" />
+    <state x="1021" y="309" width="664" height="480" key="EnvironmentVariablesDialog" timestamp="1588784190728">
+      <screen x="65" y="24" width="1855" height="1056" />
+    </state>
+    <state x="1021" y="309" width="664" height="480" key="EnvironmentVariablesDialog/1920.603.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1588784190728" />
+    <state x="780" y="297" key="FileChooserDialogImpl" timestamp="1588784266211">
+      <screen x="65" y="24" width="1855" height="1056" />
+    </state>
+    <state x="780" y="297" key="FileChooserDialogImpl/1920.603.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1588784266211" />
+    <state width="1809" height="296" key="GridCell.Tab.0.bottom" timestamp="1588784475664">
+      <screen x="1920" y="603" width="1920" height="1080" />
+    </state>
+    <state width="1809" height="296" key="GridCell.Tab.0.bottom/1920.603.1920.1080/65.24.1855.1056@1920.603.1920.1080" timestamp="1588784475664" />
+    <state width="1809" height="365" key="GridCell.Tab.0.bottom/1920.603.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1588784100743" />
+    <state width="1809" height="296" key="GridCell.Tab.0.center" timestamp="1588784475664">
+      <screen x="1920" y="603" width="1920" height="1080" />
+    </state>
+    <state width="1809" height="296" key="GridCell.Tab.0.center/1920.603.1920.1080/65.24.1855.1056@1920.603.1920.1080" timestamp="1588784475664" />
+    <state width="1809" height="365" key="GridCell.Tab.0.center/1920.603.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1588784100743" />
+    <state width="1809" height="296" key="GridCell.Tab.0.left" timestamp="1588784475663">
+      <screen x="1920" y="603" width="1920" height="1080" />
+    </state>
+    <state width="1809" height="296" key="GridCell.Tab.0.left/1920.603.1920.1080/65.24.1855.1056@1920.603.1920.1080" timestamp="1588784475663" />
+    <state width="1809" height="365" key="GridCell.Tab.0.left/1920.603.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1588784100743" />
+    <state width="1809" height="296" key="GridCell.Tab.0.right" timestamp="1588784475664">
+      <screen x="1920" y="603" width="1920" height="1080" />
+    </state>
+    <state width="1809" height="296" key="GridCell.Tab.0.right/1920.603.1920.1080/65.24.1855.1056@1920.603.1920.1080" timestamp="1588784475664" />
+    <state width="1809" height="365" key="GridCell.Tab.0.right/1920.603.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1588784100743" />
+    <state x="1062" y="329" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey" timestamp="1588784234589">
+      <screen x="65" y="24" width="1855" height="1056" />
+    </state>
+    <state x="1062" y="329" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey/1920.603.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1588784234589" />
+  </component>
+</project>

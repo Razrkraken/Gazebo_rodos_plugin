@@ -1,2 +1,2 @@
 # Gazebo_rodos_plugin
-Plugin to conect Rodos to Gazebo.
+Plugin to connect Rodos and Gazebo.

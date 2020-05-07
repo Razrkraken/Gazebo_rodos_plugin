@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD 14)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 # Find Rodos
+#add_subdirectory(rodos)
 find_package(rodos REQUIRED)
 
 # Find Gazebo
@@ -19,26 +20,26 @@ find_package(gazebo REQUIRED)
 #
 #${MY_HW_SRCS} ${MY_SRCS} ${RODOS_SUPPORT_LIBS}
 
-include_directories(${GAZEBO_INCLUDE_DIRS} ${RODOS_INCLUDE_DIRS} )
-link_directories(${GAZEBO_LIBRARY_DIRS})
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
-
-
-# Build our plugins
-add_library(rodos_plugin SHARED rodos_plugin.cc)
-target_link_libraries(rodos_plugin ${GAZEBO_LIBRARIES})
-
-add_executable(vel vel.cc)
-if (${gazebo_VERSION_MAJOR} LESS 6)
-    # These two
-    include(FindBoost)
-    find_package(Boost ${MIN_BOOST_VERSION} REQUIRED system filesystem regex)
-    target_link_libraries(vel ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES} ${RODOS_LIBRARIES})
-else ()
-    target_link_libraries(vel ${GAZEBO_LIBRARIES} ${RODOS_LIBRARIES})
-endif ()
-include_directories(~/home/alejandro/rodos-workspace/rodos/api)
-include_directories(~/home/alejandro/rodos-workspace/rodos)
+#include_directories(${GAZEBO_INCLUDE_DIRS} ${RODOS_INCLUDE_DIRS} )
+#link_directories(${GAZEBO_LIBRARY_DIRS})
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
+#
+#
+## Build our plugins
+#add_library(rodos_plugin SHARED rodos_plugin.cc)
+#target_link_libraries(rodos_plugin ${GAZEBO_LIBRARIES})
+#
+#add_executable(vel vel.cc)
+#if (${gazebo_VERSION_MAJOR} LESS 6)
+#    # These two
+#    include(FindBoost)
+#    find_package(Boost ${MIN_BOOST_VERSION} REQUIRED system filesystem regex)
+#    target_link_libraries(vel ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES} ${RODOS_LIBRARIES})
+#else ()
+#    target_link_libraries(vel ${GAZEBO_LIBRARIES} ${RODOS_LIBRARIES})
+#endif ()
+#include_directories(~/home/alejandro/rodos-workspace/rodos/api)
+#include_directories(~/home/alejandro/rodos-workspace/rodos)
 
 ##################################################################33
 
@@ -46,27 +47,28 @@ include_directories(~/home/alejandro/rodos-workspace/rodos)
 ###############   Without RODOS
 
 #${MY_HW_SRCS} ${MY_SRCS} ${RODOS_SUPPORT_LIBS}
-#include_directories(${GAZEBO_INCLUDE_DIRS} )
-#link_directories(${GAZEBO_LIBRARY_DIRS} )
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS} ")
-#
-#
-## Build our plugins
-##Build Rodos_plugin
-#add_library(rodos_plugin SHARED rodos_plugin.cc)
-#target_link_libraries(rodos_plugin ${GAZEBO_LIBRARIES})
-#
-#
-## Add standalone Executable
-#add_executable(vel vel.cc)
-#if (${gazebo_VERSION_MAJOR} LESS 6)
-#    # These two
-#    include(FindBoost)
-#    find_package(Boost ${MIN_BOOST_VERSION} REQUIRED system filesystem regex)
-#    target_link_libraries(vel ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
-#else ()
-#    target_link_libraries(vel ${GAZEBO_LIBRARIES} )
-#endif ()
+
+include_directories(${GAZEBO_INCLUDE_DIRS} )
+link_directories(${GAZEBO_LIBRARY_DIRS} )
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS} ")
+
+
+# Build our plugins
+#Build Rodos_plugin
+add_library(rodos_plugin SHARED rodos_plugin.cc)
+target_link_libraries(rodos_plugin ${GAZEBO_LIBRARIES})
+
+
+# Add standalone Executable
+add_executable(vel vel.cc)
+if (${gazebo_VERSION_MAJOR} LESS 6)
+    # These two
+    include(FindBoost)
+    find_package(Boost ${MIN_BOOST_VERSION} REQUIRED system filesystem regex)
+    target_link_libraries(vel ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
+else ()
+    target_link_libraries(vel ${GAZEBO_LIBRARIES} )
+endif ()
 
 
 ###########################################################################
