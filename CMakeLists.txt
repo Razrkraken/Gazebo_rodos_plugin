@@ -8,12 +8,12 @@ set(CMAKE_CXX_STANDARD 14)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 # Find Rodos
-#add_subdirectory(rodos)
-find_package(rodos REQUIRED)
+
+include(deps/rodos/cmake/port/linux-x86.cmake)
+add_subdirectory(deps/rodos)
 
 # Find Gazebo
 find_package(gazebo REQUIRED)
-
 
 
 ###############   With RODOS
@@ -56,7 +56,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS} ")
 # Build our plugins
 #Build Rodos_plugin
 add_library(rodos_plugin SHARED rodos_plugin.cc)
-target_link_libraries(rodos_plugin ${GAZEBO_LIBRARIES})
+target_link_libraries(rodos_plugin ${GAZEBO_LIBRARIES} rodos)
 
 
 # Add standalone Executable
@@ -77,6 +77,9 @@ endif ()
 
 add_custom_command(TARGET rodos_plugin POST_BUILD COMMAND
         ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/world/Glider $ENV{HOME}/.gazebo/models/Glider)
+
+add_custom_command(TARGET rodos_plugin POST_BUILD COMMAND
+        ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/world/cessna $ENV{HOME}/.gazebo/models/cessna)
 
 
 #extra information No relevant code
