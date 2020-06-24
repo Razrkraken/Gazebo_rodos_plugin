@@ -5,14 +5,61 @@
 #include <gazebo/physics/physics.hh>
 #include <gazebo/transport/transport.hh>
 #include <gazebo/msgs/msgs.hh>
+#include <rodos.h>
+#include <thread>
+#include <dlfcn.h>
+
+static Application nameNotImportantHW("HelloWorld");
+
+
+class HelloWorld : public StaticThread<> {
+
+public:
+    HelloWorld() : StaticThread<>("HelloWorld") {}
+
+    void init() {
+        PRINTF(SCREEN_RED "This is init() for Printing Hello World" SCREEN_RESET);
+    }
+
+    void run() {
+        PRINTF(SCREEN_RED "Hello World!" SCREEN_RESET);
+    }
+};
+
+HelloWorld helloworld;
+
+
+typedef int (*rodosMainType)(int, char **);
+
+Topic<long> counter1(10, "counter1");
+
+__attribute__((used)) class SimpleSub : public Subscriber {
+public:
+    SimpleSub() : Subscriber(counter1, "simplesub") {}
+
+    uint32_t put(const uint32_t topicId, const size_t len, void *data, const NetMsgInfo &netMsgInfo) override {
+        PRINTF("Hello Mundo!");
+        return 1;
+    }
+} simpleSub;
 
 
 namespace gazebo {
+
 /// \brief A plugin to control joint of Glider.
     class RodosPlugin : public ModelPlugin {
         /// \brief Constructor
     public:
-        RodosPlugin() {}
+        RodosPlugin() {
+            signal(SIGALRM, RodosPlugin::signalHandler);
+            signal(SIGUSR1, RodosPlugin::signalHandler);
+            signal(SIGIO, RodosPlugin::signalHandler);
+            if (rodosThreadId == 0) {
+                std::thread rodosMainThread(&RodosPlugin::rodosSystemMain);
+                rodosThreadId = rodosMainThread.native_handle();
+                rodosMainThread.detach();
+            }
+        }
 
 
 /// \brief Handle incoming message
@@ -55,6 +102,9 @@ namespace gazebo {
         /// \param[in] _sdf A pointer to the plugin's SDF element.
     public:
         virtual void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
+
+
+
 
             // Store the model pointer for convenience.
             this->model = _model;
@@ -144,8 +194,29 @@ namespace gazebo {
     private:
         transport::SubscriberPtr sub1;
     private:
+        static pthread_t rodosThreadId;
         physics::Joint_V joints;
+
+
+        static void signalHandler(int signal) {
+            if (rodosThreadId != 0) {
+                pthread_kill(RodosPlugin::rodosThreadId, signal);
+            }
+        }
+
+        static void rodosSystemMain() {
+            auto rodosMain = (rodosMainType) dlsym(RTLD_DEFAULT, "main");
+            if (rodosMain == nullptr) {
+                gzerr << "Unable to find RODOS main function!" << std::endl;
+            } else {
+                rodosMain(0, nullptr);
+            }
+        }
+
     };
+
+    pthread_t RodosPlugin::rodosThreadId = 0;
+
 
 // Tell Gazebo about this plugin, so that Gazebo can call Load on this plugin.
     GZ_REGISTER_MODEL_PLUGIN(RodosPlugin)
