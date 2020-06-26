@@ -298,9 +298,7 @@
 
         <!-- Plugins -->
 
-
-
-        <plugin name="rodos_plugin" filename="cmake-build-debug/librodos_plugin.so"/>
+        <plugin name="rodos_plugin" filename="cmake-build-debug/libexample.so"/>
 
         <!--plugin name="{$modelName}_Wing" filename="libLiftDragPlugin.so">
           <a0>0.1</a0>

@@ -29,28 +29,20 @@ find_package(Threads)
 # Build our plugins
 #Build Rodos_plugin
 add_library(rodos_plugin SHARED src/rodos_plugin.cc)
-target_link_libraries(rodos_plugin ${GAZEBO_LIBRARIES} rodos Threads::Threads ${CMAKE_DL_LIBS})
+target_link_libraries(rodos_plugin PUBLIC ${GAZEBO_LIBRARIES} rodos Threads::Threads ${CMAKE_DL_LIBS})
 
-###########################################################################
-
-#${CPP_COMP}   ${CFLAGS} ${CPPFLAGS} ${INCLUDES} ${FIRST_LINK_OBJ} -o tst  $* ${LINKFLAGS}
-
-#add_custom_command(TARGET rodos_plugin POST_BUILD COMMAND
-#        ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/world/Glider $ENV{HOME}/.gazebo/models/Glider)
-#
-#add_custom_command(TARGET rodos_plugin POST_BUILD COMMAND
-#        ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/world/cessna $ENV{HOME}/.gazebo/models/cessna)
-#
-
-#extra information No relevant code
-# -D CMAKE_FIND_DEBUG_MODE=ON
-#CMAKE_PREFIX_PATH=/home/alejandro/rodos-workspace
-
+# Example
+add_library(example SHARED example/src/example.cpp)
+target_link_libraries(example rodos_plugin)
 
 add_custom_target(
-        test
-        COMMAND gazebo --verbose example/world/Glider.world
-        DEPENDS rodos_plugin
+        run_example
+        COMMAND ${CMAKE_COMMAND} -E env GAZEBO_MODEL_PATH=$ENV{GAZEBO_MODEL_PATH}${CMAKE_CURRENT_SOURCE_DIR}/example/world: GAZEBO_RESOURCE_PATH=$ENV{GAZEBO_RESOURCE_PATH}${CMAKE_CURRENT_SOURCE_DIR}/example/world:
+        gazebo --verbose example/world/Glider.world
+        DEPENDS example
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+
+
 
