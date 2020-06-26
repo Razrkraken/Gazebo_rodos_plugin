@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD 14)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 # Find Rodos
-#add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-fPIC)
+set(ENABLE_RODOS_RTTI ON CACHE BOOL "Enable run-time type information for RODOS" FORCE)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 include(deps/rodos/cmake/port/posix.cmake)
 add_subdirectory(deps/rodos)
