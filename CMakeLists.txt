@@ -28,8 +28,9 @@ find_package(Threads)
 
 # Build our plugins
 #Build Rodos_plugin
-add_library(rodos_plugin SHARED src/rodos_plugin.cc)
+add_library(rodos_plugin SHARED src/rodos_plugin.cpp include/GazeboTopic.h include/rodos_plugin.h)
 target_link_libraries(rodos_plugin PUBLIC ${GAZEBO_LIBRARIES} rodos Threads::Threads ${CMAKE_DL_LIBS})
+target_include_directories(rodos_plugin PUBLIC include)
 
 # Example
 add_library(example SHARED example/src/example.cpp)
@@ -38,7 +39,7 @@ target_link_libraries(example rodos_plugin)
 add_custom_target(
         run_example
         COMMAND ${CMAKE_COMMAND} -E env GAZEBO_MODEL_PATH=$ENV{GAZEBO_MODEL_PATH}${CMAKE_CURRENT_SOURCE_DIR}/example/world: GAZEBO_RESOURCE_PATH=$ENV{GAZEBO_RESOURCE_PATH}${CMAKE_CURRENT_SOURCE_DIR}/example/world:
-        gazebo --verbose example/world/Glider.world
+        gazebo --verbose example/world/SimulationRodosWorld.world
         DEPENDS example
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )

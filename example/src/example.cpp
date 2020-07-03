@@ -1,20 +1,23 @@
+#include <GazeboTopic.h>
+#include <gazebo/msgs/imu.pb.h>
 #include <rodos.h>
 
 static Application nameNotImportantHW("HelloWorld");
 
+GazeboTopic<gazebo::msgs::IMU> imuTopic(10, "~/Schleicher_ASK_21/Fuselage/IMU_Fuselage/imu");
 
-class HelloWorld : public StaticThread<> {
 
+class SimpleSub : public Subscriber {
 public:
-    HelloWorld() : StaticThread<>("HelloWorld") { PRINTF(SCREEN_RED "Hello World!" SCREEN_RESET); }
+    SimpleSub() : Subscriber(imuTopic, "simplesub") {}
 
-    void init() {
-        PRINTF(SCREEN_RED "This is init() for Printing Hello World" SCREEN_RESET);
+    uint32_t put(const uint32_t topicId, const size_t len, void *data, const NetMsgInfo &netMsgInfo) override {
+        gazebo::msgs::IMU *gazeboData = (gazebo::msgs::IMU *) data;
+        PRINTF("%s \n", gazeboData->entity_name().c_str());
+        return 1;
     }
 
-    void run() {
-        PRINTF(SCREEN_RED "Hello World!" SCREEN_RESET);
-    }
-};
+} simpleSub;
 
-HelloWorld helloworld;
+
+

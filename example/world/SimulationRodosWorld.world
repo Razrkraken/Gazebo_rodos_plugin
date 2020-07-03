@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.5">
-    <world name="default">
+    <world name="SimulationRodosWorld">
         <!-- A global light source -->
         <include>
             <uri>model://sun</uri>
@@ -21,6 +21,6 @@
         <!-- Attach the plugin to this model -->
 
         <!--        </model>-->
-
+        <plugin name="rodos_plugin" filename="cmake-build-debug/libexample.so"/>
     </world>
 </sdf>

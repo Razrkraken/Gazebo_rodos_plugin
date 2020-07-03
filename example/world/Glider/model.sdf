@@ -33,19 +33,19 @@
                     <iyz>-0.004375</iyz>
                 </inertia>
             </inertial>
-            <!--<sensor type="imu" name="IMU_Fuselage">-->
-                <!--<always_on> true </always_on>-->
-                <!--<update_rate> 50 </update_rate>-->
-                <!--<frame name="IMU_frame">-->
-                    <!--<pose>-0.00004958 0.391 0.031 0 0 0</pose>-->
-                <!--</frame>-->
-            <!--</sensor>-->
+            <sensor type="imu" name="IMU_Fuselage">
+                <always_on>true</always_on>
+                <update_rate>50</update_rate>
+                <frame name="IMU_frame">
+                    <pose>-0.00004958 0.391 0.031 0 0 0</pose>
+                </frame>
+            </sensor>
             <!--<sensor type="magnetometer" name="Magn_Fuselage">-->
-                <!--<always_on> true </always_on>-->
-                <!--<update_rate> 50 </update_rate>-->
-                <!--<frame name="Magn_frame">-->
-                    <!--<pose>-0.00004958 0.391 0.031 0 0 0</pose>-->
-                <!--</frame>-->
+            <!--<always_on> true </always_on>-->
+            <!--<update_rate> 50 </update_rate>-->
+            <!--<frame name="Magn_frame">-->
+            <!--<pose>-0.00004958 0.391 0.031 0 0 0</pose>-->
+            <!--</frame>-->
             <!--</sensor>-->
         </link>
         <link name="Tailplane">
@@ -298,7 +298,6 @@
 
         <!-- Plugins -->
 
-        <plugin name="rodos_plugin" filename="cmake-build-debug/libexample.so"/>
 
         <!--plugin name="{$modelName}_Wing" filename="libLiftDragPlugin.so">
           <a0>0.1</a0>
