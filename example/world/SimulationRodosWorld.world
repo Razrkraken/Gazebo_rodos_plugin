@@ -21,6 +21,6 @@
         <!-- Attach the plugin to this model -->
 
         <!--        </model>-->
-        <plugin name="rodos_plugin" filename="cmake-build-debug/libexample.so"/>
+        <plugin name="rodosPlugin" filename="cmake-build-debug/libexample.so"/>
     </world>
 </sdf>

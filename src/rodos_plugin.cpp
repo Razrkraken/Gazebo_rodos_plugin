@@ -8,8 +8,6 @@
 #include "rodos_plugin.h"
 
 namespace gazebo {
-
-
     pthread_t RodosPlugin::rodosThreadId = 0;
 
     RodosPlugin::RodosPlugin() {
@@ -59,8 +57,7 @@ namespace gazebo {
         }
     }
 
-
-// Tell Gazebo about this plugin, so that Gazebo can call Load on this plugin.
+    // Tell Gazebo about this plugin, so that Gazebo can call Load on this plugin.
     GZ_REGISTER_WORLD_PLUGIN(RodosPlugin)
 }
 

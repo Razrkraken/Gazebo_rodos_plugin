@@ -33,8 +33,10 @@ target_link_libraries(rodos_plugin PUBLIC ${GAZEBO_LIBRARIES} rodos Threads::Thr
 target_include_directories(rodos_plugin PUBLIC include)
 
 # Example
+add_library(glider SHARED example/src/glider.cpp)
+target_link_libraries(glider ${GAZEBO_LIBRARIES})
 add_library(example SHARED example/src/example.cpp)
-target_link_libraries(example rodos_plugin)
+target_link_libraries(example rodos_plugin glider)
 
 add_custom_target(
         run_example

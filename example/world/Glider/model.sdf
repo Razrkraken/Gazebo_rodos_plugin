@@ -299,6 +299,7 @@
         <!-- Plugins -->
 
 
+        <plugin name="GliderPlugin" filename="cmake-build-debug/libglider.so"/>
         <!--plugin name="{$modelName}_Wing" filename="libLiftDragPlugin.so">
           <a0>0.1</a0>
           <cla>0.100</cla>
