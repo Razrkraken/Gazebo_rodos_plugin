@@ -8,6 +8,7 @@
 #include <rodos.h>
 #include <queue>
 #include <condition_variable>
+#include <utility>
 #include "rodos_plugin.h"
 
 template<class T>
@@ -53,7 +54,7 @@ private:
 template<class T>
 class GazeboTopicPutter : public Putter {
 public:
-    GazeboTopicPutter(GazeboTopic<T> *gazeboTopic) : topic(gazeboTopic) {}
+    explicit GazeboTopicPutter(GazeboTopic<T> *gazeboTopic) : topic(gazeboTopic) {}
 
     bool putGeneric(uint32_t topicId, size_t len, const void *msg, const NetMsgInfo &netMsgInfo) override {
         auto data = (const T *) msg;
@@ -65,7 +66,7 @@ public:
     }
 
     void load(gazebo::transport::PublisherPtr gazeboPublisher) {
-        publisher = gazeboPublisher;
+        publisher = std::move(gazeboPublisher);
     }
 
 private:

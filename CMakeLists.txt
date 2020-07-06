@@ -33,15 +33,15 @@ target_link_libraries(rodos_plugin PUBLIC ${GAZEBO_LIBRARIES} rodos Threads::Thr
 target_include_directories(rodos_plugin PUBLIC include)
 
 # Example
-add_library(glider SHARED example/src/glider.cpp)
-target_link_libraries(glider ${GAZEBO_LIBRARIES})
+add_library(cessna SHARED example/src/cessna.cpp)
+target_link_libraries(cessna ${GAZEBO_LIBRARIES})
 add_library(example SHARED example/src/example.cpp)
-target_link_libraries(example rodos_plugin glider)
+target_link_libraries(example rodos_plugin cessna)
 
 add_custom_target(
         run_example
         COMMAND ${CMAKE_COMMAND} -E env GAZEBO_MODEL_PATH=$ENV{GAZEBO_MODEL_PATH}${CMAKE_CURRENT_SOURCE_DIR}/example/world: GAZEBO_RESOURCE_PATH=$ENV{GAZEBO_RESOURCE_PATH}${CMAKE_CURRENT_SOURCE_DIR}/example/world:
-        gazebo --verbose example/world/SimulationRodosWorld.world
+        gazebo --verbose example/world/cessna_demo.world
         DEPENDS example
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )

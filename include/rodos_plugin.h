@@ -5,7 +5,7 @@ class GzTopicInitializer {
 public:
     GzTopicInitializer();
 
-    virtual void load(const gazebo::transport::NodePtr node) = 0;
+    virtual void load(gazebo::transport::NodePtr node) = 0;
 
     static const std::list<GzTopicInitializer *> &getGzTopicList();
 private:
