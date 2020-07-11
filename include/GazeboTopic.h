@@ -155,7 +155,7 @@ public:
      *
      * @param node The Gazebo node.
      */
-    void load(gazebo::transport::NodePtr node) override {
+    void init(gazebo::transport::NodePtr node) override {
         gzmsg << "Loading GazeboTopic: " << this->getName() << std::endl;
         this->gazeboSub = node->Subscribe(this->getName(), &GazeboTopic<T>::onGazeboMsg, this);
         this->gazeboPutter.init(node->Advertise<T>(this->getName(), 50, 50));

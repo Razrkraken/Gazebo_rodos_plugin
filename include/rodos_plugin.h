@@ -13,7 +13,7 @@ public:
      *
      * @param node The Gazebo node.
      */
-    virtual void load(gazebo::transport::NodePtr node) = 0;
+    virtual void init(gazebo::transport::NodePtr node) = 0;
 
     /**
      * @return A readonly reference to the list of all GzTopicInitializer instances.

@@ -54,7 +54,7 @@ namespace gazebo {
 
     void RodosPlugin::initConnectors() {
         for (auto gzTopic: GzTopicInitializer::getGzTopicList()) {
-            gzTopic->load(this->node);
+            gzTopic->init(this->node);
         }
     }
 
