@@ -7,6 +7,11 @@
 #include <GazeboTopic.h>
 #include "rodos_plugin.h"
 
+/**
+ * The type of the rodos main function.
+ */
+typedef int (*rodosMainFunc)(int, char **);
+
 namespace gazebo {
     pthread_t RodosPlugin::rodosThreadId = 0;
 
@@ -22,11 +27,7 @@ namespace gazebo {
     }
 
     void RodosPlugin::Load(physics::WorldPtr world, sdf::ElementPtr sdf) {
-
-        /***Create Subscribers***/
-        // Create the node
         this->node = transport::NodePtr(new transport::Node());
-
 #if GAZEBO_MAJOR_VERSION < 8
         this->node->Init(world->GetName());
 #else
@@ -43,7 +44,7 @@ namespace gazebo {
 
     void RodosPlugin::rodosSystemMain() {
         pthread_setname_np(pthread_self(), "RODOS_main_thread");
-        auto rodosMain = (rodosMainType) dlsym(RTLD_DEFAULT, "main");
+        auto rodosMain = (rodosMainFunc) dlsym(RTLD_DEFAULT, "main");
         if (rodosMain == nullptr) {
             gzerr << "Unable to find RODOS main function!" << std::endl;
         } else {
